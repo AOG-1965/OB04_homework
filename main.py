@@ -22,7 +22,7 @@ class Fighter:
         if self.weapon is None:             # Проверка наличия оружия
             print(f"{self.name} не имеет оружия.")
         else:
-            print(f"{self.name} атакует {monster.name}!")
+            print(f"{self.name} атакует монстра {monster.name}!")
             damage = self.weapon.attack()   # Вызывается метод атаки у объекта оружия
             monster.take_damage(damage)     # Cохранение урона от использованного оружия
 
@@ -32,11 +32,12 @@ class Monster ():
     def __init__(self, name, health):
         self.name = name            # Имя монстра
         self.health = health        # Здоровье (жизненная сила) монстра
+        print(f"Уровень здоровья монстра {self.name} - {health}")
 
     def take_damage(self, damage):  # Метод фиксирования нанесенного ущерба здоровью монстра
         self.health -= damage       # Из уровня здоровья монстра вычитается значение нанесенного ущерба
         if self.health > 0:
-            print(f"Уровень здоровья {self.name} - {self.health}.")
+            print(f"Уровень здоровья монстра {self.name} - {self.health}.")
         else:
             self.health = 0         # В случае достижения нулевого уровня здоровья и меньше
             print(f"{self.name} побежден!")
@@ -67,3 +68,20 @@ class Bow(Weapon):
     def attack(self):
         print("Боец выпускает стрелу из лука!")
         return 30                   # Уникальность метода attack в размере урона, который наносит лук
+
+# Проверка работы кода
+# Создание объектов
+fighter = Fighter("Рыцарь")
+monster = Monster("Дракон", 100)
+
+# Объекты оружие
+sword = Sword()                 # Меч
+bow = Bow()                     # Лук
+
+fighter.change_weapon(sword)    # Боец выбирает меч
+fighter.attack(monster)         # Боец атакует монстра
+
+fighter.change_weapon(bow)      # Боец выбирает лук
+fighter.attack(monster)         # Боец атакует монстра
+
+fighter.attack(monster)         # Боец еще раз атакует монстра из лука
