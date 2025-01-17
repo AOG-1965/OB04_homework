@@ -26,3 +26,12 @@ class Monster ():
 
     def attack(self):               # Абстрактный метод атаки для реализован в каждом конкретном типе оружия
         pass
+
+# Создание абстрактного класса для оружия
+
+from abc import ABC, abstractmethod
+
+class Weapon(ABC):
+    @abstractmethod
+    def attack(self):               # Метод атаки для реализации в каждом конкретном типе оружия
+        pass
